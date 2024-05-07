@@ -68,6 +68,7 @@ body {
     font-size: 10px;
     background-color: darkslategray;
     position: absolute;
+    margin-top: 50px;
   }
   
   .brushes {
@@ -92,15 +93,36 @@ body {
   }
   
 .buttonlinkgrid {
+    text-transform: uppercase;
     font-size: 16px;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-100px, 110%);
 }
 
-.buttongridcontainer {
+.buttongridcontainer {  
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     text-align: center;
     color: white;
+    padding: 50px;
+    margin-bottom: 150px;
+    max-height: 150px;
+  }
+
+.buttontext {
+  text-transform: uppercase;
+  font-size: 16px;
+  transform: translate(-100px, 110%);
+}
+.buttonimage
+{
+  transition: all 0.2s;
+  height: 150px;
+}
+.buttonimage:hover {
+  cursor: pointer;
+  transition: all 0.2s;
+  filter: saturate(200%);
+  height: 160px;
   }
