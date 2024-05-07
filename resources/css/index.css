@@ -1,0 +1,106 @@
+* {
+    font-family: Helvetica, Arial, sans-serif;
+    color: aliceblue;
+  }
+
+@font-face {
+    font-family: comicSans;
+    src: url('../fonts/Ldfcomicsans-jj7l.ttf');
+}
+  
+body {
+    background-color: black;
+}
+  
+  h1 {
+    font-family: comicSans;
+    color: khaki;
+    font-size: 100px;
+    font-size: 14vw;
+    font-weight: bold;
+    background-image: url('../images/pattern.png');
+    text-align: center;
+    /* height: 200px; */
+    max-height: 800px;
+    width: 100%;
+    /* max-width: 800px; */
+    background-image: fixed;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin: 0;
+  }
+  
+  h2 {
+    font-family: Helvetica;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  h3 {
+    font-family: Helvetica;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  p, 
+  li {
+    font-family: comicSans;
+    font-size: 16px;
+  }
+  
+  
+  a {
+    font-size: 3vw;
+    color: aliceblue;
+    font-family: comicSans;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px; 
+    margin: 0;
+    right: 0px;
+    border: 2px solid rgb(45, 73, 87);
+    border-radius: 10%;
+  }
+
+  footer {
+    font-size: 10px;
+    background-color: darkslategray;
+    position: absolute;
+  }
+  
+  .brushes {
+    background-color: mediumspringgreen;
+  }
+
+  .frames {
+    background-color: lightcoral;
+  }
+
+  .paint {
+    background-color: skyblue;
+  }
+
+
+.menubar {
+    background-color: rgb(34, 34, 34);
+    padding: 10px;
+    margin: 0;
+    text-align: center;
+    
+  }
+  
+.buttonlinkgrid {
+    font-size: 16px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.buttongridcontainer {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
