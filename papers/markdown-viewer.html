@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="../resources/css/index.css" type="text/css" rel="stylesheet">
+  <title>Paper - Beans</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    @font-face {
+      font-family: comicSerif;
+      src: url('../resources/fonts/HVD_Comic_Serif_Pro.otf');
+    }
+
+    body {
+      background-color: black !important;
+    }
+
+    #markdown-content {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      padding-bottom: 80px;
+      line-height: 1.6;
+      color: aliceblue;
+    }
+    #markdown-content * {
+      font-family: comicSerif !important;
+      color: aliceblue;
+    }
+    #markdown-content h1 {
+      color: khaki;
+      font-size: 48px;
+      margin-top: 20px;
+    }
+    #markdown-content h2, #markdown-content h3 {
+      color: aliceblue;
+    }
+    #markdown-content h2 {
+      color: khaki;
+      font-size: 32px;
+    }
+    #markdown-content a {
+      color: skyblue;
+    }
+    #markdown-content table {
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    #markdown-content th, #markdown-content td {
+      border: 1px solid #555;
+      padding: 8px 12px;
+    }
+    #markdown-content th {
+      background-color: #222;
+      color: khaki;
+    }
+    #markdown-content blockquote {
+      border-left: 4px solid #555;
+      padding-left: 16px;
+      margin-left: 0;
+      color: #aaa;
+    }
+    #markdown-content pre {
+      background-color: #222;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    #markdown-content code {
+      font-family: monospace !important;
+      background-color: #333;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    #markdown-content pre code {
+      background-color: transparent;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <p class="menubar">
+    <a href="../index.html">Home</a>
+    <a href="../gallery.html">Gallery</a>
+    <a href="../papers/index.html" style="font-family: comicSerif;">Papers</a>
+    <a href="../other-projects.html">Other Projects</a>
+  </p>
+
+  <div id="markdown-content">
+    <p>Loading markdown content...</p>
+  </div>
+
+  <script>
+    // Get the markdown file from URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const mdFile = urlParams.get('file');
+
+    if (mdFile) {
+      fetch(mdFile)
+        .then(response => response.text())
+        .then(markdown => {
+          // Render markdown to HTML
+          document.getElementById('markdown-content').innerHTML = marked.parse(markdown);
+
+          // Update page title with first h1 if it exists
+          const firstH1 = document.querySelector('#markdown-content h1');
+          if (firstH1) {
+            document.title = firstH1.textContent + ' - Beans';
+          }
+        })
+        .catch(error => {
+          document.getElementById('markdown-content').innerHTML =
+            '<p>Error loading markdown file: ' + mdFile + '</p>';
+          console.error('Error:', error);
+        });
+    } else {
+      document.getElementById('markdown-content').innerHTML =
+        '<p>No markdown file specified. Use ?file=filename.md</p>';
+    }
+  </script>
+
+</body>
+
+<footer>©️ 2024 Ekke Kaha - All rights reserved</footer>
+
+</html>

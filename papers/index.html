@@ -1,0 +1,115 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="../resources/css/index.css" type="text/css" rel="stylesheet">
+  <title>Papers - Beans</title>
+</head>
+
+<body>
+  <h1>Papers</h1>
+  <p class="menubar">
+  <a href="../index.html" >Home</a>
+  <a href="../gallery.html">Gallery</a>
+  <a href="../papers/index.html" style="font-family: comicSerif;">Papers</a>
+  <a href="../other-projects.html">Other Projects</a>
+  </p>
+  <p>Research papers and writings:</p>
+
+  <style>
+    @font-face {
+      font-family: comicSerif;
+      src: url('../resources/fonts/HVD_Comic_Serif_Pro.otf');
+    }
+  </style>
+
+  <div style="padding: 20px;">
+    <ul id="papers-list" style="list-style: none; padding-left: 0;">
+      <li style="font-family: comicSerif; padding: 5px 0;"><a href="LICENSE" style="text-decoration: none; font-family: comicSerif;">LICENSE</a> <span style="margin-left: 20px; color: #888; font-family: comicSerif;">- CC BY 4.0</span></li>
+      <li style="font-family: comicSerif; padding: 5px 0;"><a href="trinary_ontology_core.md" style="text-decoration: none; font-family: comicSerif;">trinary_ontology_core.md</a></li>
+      <li style="font-family: comicSerif; padding: 5px 0;"><a href="trinary_ontology_technical.md" style="text-decoration: none; font-family: comicSerif;">trinary_ontology_technical.md</a></li>
+    </ul>
+  </div>
+
+  <script>
+    // Try to fetch papers from GitHub API (works on GitHub Pages)
+    fetch('https://api.github.com/repos/Ekats/Ekats.github.io/contents/papers')
+      .then(response => {
+        if (!response.ok) throw new Error('API unavailable');
+        return response.json();
+      })
+      .then(files => {
+        const list = document.getElementById('papers-list');
+        list.innerHTML = '';
+
+        files
+          .filter(file => file.name !== 'index.html' && file.name !== 'markdown-viewer.html')
+          .forEach(file => {
+            const li = document.createElement('li');
+            li.style.fontFamily = 'comicSerif';
+            li.style.padding = '5px 0';
+
+            const a = document.createElement('a');
+            // Check if it's a markdown file
+            if (file.name.endsWith('.md')) {
+              a.href = 'markdown-viewer.html?file=' + file.name;
+            } else {
+              a.href = file.name;
+            }
+            a.textContent = '📄 ' + file.name;
+            a.style.textDecoration = 'none';
+            a.style.fontFamily = 'comicSerif';
+            li.appendChild(a);
+
+            // Add file info
+            const info = document.createElement('span');
+            info.style.marginLeft = '20px';
+            info.style.color = '#888';
+            info.style.fontFamily = 'comicSerif';
+
+            if (file.name === 'LICENSE') {
+              info.textContent = '- CC BY 4.0';
+            }
+
+            li.appendChild(info);
+            list.appendChild(li);
+          });
+
+        if (files.filter(f => f.name !== 'index.html').length === 0) {
+          list.innerHTML = '<li style="font-family: comicSerif;">No papers yet...</li>';
+        }
+      })
+      .catch(error => {
+        // Fallback for local viewing - style the static HTML list
+        console.log('Using static file list (local mode)');
+        const items = document.querySelectorAll('#papers-list li');
+        items.forEach(li => {
+          li.style.fontFamily = 'comicSerif';
+          li.style.padding = '5px 0';
+          const a = li.querySelector('a');
+          if (a) {
+            const fileName = a.getAttribute('href');
+            // Wrap .md files with markdown viewer
+            if (fileName && fileName.endsWith('.md')) {
+              a.setAttribute('href', 'markdown-viewer.html?file=' + fileName);
+            }
+            // Add emoji if not already there
+            if (!a.textContent.startsWith('📄')) {
+              a.textContent = '📄 ' + a.textContent;
+            }
+            a.style.textDecoration = 'none';
+            a.style.fontFamily = 'comicSerif';
+          }
+          // Style all spans in the list item too
+          const spans = li.querySelectorAll('span');
+          spans.forEach(span => {
+            span.style.fontFamily = 'comicSerif';
+          });
+        });
+      });
+  </script>
+
+</body>
+
+<footer>©️ 2024 Ekke Kaha - All rights reserved</footer>
+
+</html>
